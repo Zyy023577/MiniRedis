@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "MiniRedis: build and test",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/build_all.ps1"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "MiniRedis: run server",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/run_server.ps1"
+      ],
+      "isBackground": false,
+      "problemMatcher": []
+    },
+    {
+      "label": "MiniRedis Web: dev server",
+      "type": "shell",
+      "command": "npm.cmd",
+      "args": ["run", "dev"],
+      "options": {
+        "cwd": "${workspaceFolder}/web",
+        "env": {
+          "VITE_PROXY_TARGET": "http://127.0.0.1:18080"
+        }
+      },
+      "isBackground": false,
+      "problemMatcher": []
+    }
+  ]
+}
